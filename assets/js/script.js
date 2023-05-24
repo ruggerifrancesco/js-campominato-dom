@@ -52,7 +52,7 @@ function generateGrid(bombCell, elementHits, gameEnd) {
 
     // Solution to clicked function by stack overflow
     gameCell.addEventListener('click', function () {
-      if (gameCell.classList.contains('clicked')) {
+      if (gameCell.classList.contains('clicked') || gameEnd) {
         return; // Exit if the cell has already been clicked
       }
 
@@ -69,6 +69,7 @@ function generateGrid(bombCell, elementHits, gameEnd) {
          if (elementHits === 1) {
           console.log('Game over! You hit a bomb. You lost!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
+          gameGridContainer.classList.add('hidden');
         }
 
       } else {
