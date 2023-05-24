@@ -5,14 +5,12 @@ window.addEventListener('load', () => {
     const header = document.getElementById('header');
     const gameContainer = document.getElementById('game-container');
     const footer = document.querySelector('footer');
-    const h4Element = document.querySelector('#grid-game-container h4');
   
     startButton.addEventListener('click', () => {
       container.style.display = 'none';
       header.style.display = 'flex';
       gameContainer.classList.remove('hidden');
       footer.classList.remove('hidden');
-      h4Element.classList.add('hidden');
     });
   });
   
@@ -25,6 +23,7 @@ startActualGameBtn.addEventListener ('click',
        // Clear the console
       console.clear();
 
+      let clearedCellsCount = 0; // Variable to track the number of cleared cells
       let bombsHitCount = 0; // Variable to track the number of bombs hit
       let gameEnded = false; // Variable to track if the game has ended
 
@@ -38,12 +37,12 @@ startActualGameBtn.addEventListener ('click',
       const bombNumbers = randomNumbersNotEqual(bombCount, minRandom, maxRandom); // Generate random bomb cell numbers
       console.log(bombNumbers);
 
-      generateGrid(bombNumbers, bombsHitCount, gameEnded);
+      generateGrid(bombNumbers, clearedCellsCount,  bombsHitCount, gameEnded);
     }
 )
 
 // Function to generate the grid
-function generateGrid(bombCell, elementHits, gameEnd) {
+function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
 
   for (let i = 1; i <= 100; i++) {
     const gameCell = createElement('div', 'bomb-cell');
@@ -60,23 +59,32 @@ function generateGrid(bombCell, elementHits, gameEnd) {
 
       if (bombCell.includes(i)) {
         // Increase Counter
-        elementHits++
+        elementHits++;
+        clearElements++;
 
         console.log('You hit a bomb at cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'red';
 
-         // Instructions after the player takes a bomb
-         if (elementHits === 1) {
+        // Instructions after the player takes a bomb
+        if (elementHits === 16) {
           console.log('Game over! You hit a bomb. You lost!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
           gameGridContainer.classList.add('hidden');
           startActualGameBtn.innerHTML = 'Play New Game';
-        }
+        } 
 
       } else {
         console.log('You cleared cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'green';
+
+        if (clearElements === 100 && elementHits === 0) {
+          console.log('Game over! You cleared all the grid. Congratulation!');
+          gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
+          gameGridContainer.classList.add('hidden');
+          startActualGameBtn.innerHTML = 'Play New Game';
+        }
       }
+      
     });
 
     gameCell.appendChild(cellNumber); // Append the number element to the cell
