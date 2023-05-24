@@ -44,6 +44,7 @@ function generateGrid(bombCell) {
     const cellNumber = createElement('span', 'cell-number');
     cellNumber.textContent = i; // Set the cell number
 
+    // Solution to clicked function by stack overflow
     gameCell.addEventListener('click', function () {
       if (gameCell.classList.contains('clicked')) {
         return; // Exit if the cell has already been clicked
