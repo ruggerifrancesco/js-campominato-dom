@@ -26,9 +26,9 @@ startActualGameBtn.addEventListener ('click',
       // Inizialize Game
       const bombCount = 16;
       const minRandom = 1;
-      const maxRandom = 16;
+      const maxRandom = 100;
       const bombNumbers = randomNumbersNotEqual(bombCount, minRandom, maxRandom); // Generate random bomb cell numbers
-      console.log(randomNumbersNotEqual(bombCount, minRandom, maxRandom)); // Print arrayRandomNumbers in console
+      // console.log(randomNumbersNotEqual(bombCount, minRandom, maxRandom)); // Print arrayRandomNumbers in console
 
       generateGrid(bombNumbers);
     }
@@ -43,13 +43,13 @@ function generateGrid(bombCell) {
     cellNumber.textContent = i; // Set the cell number
 
     gameCell.addEventListener('click', function () {
-
-      if (gameCell.classList.contains('cell-with-bomb')) {
+      if (bombCell.includes(i)) {
         console.log('You hit a bomb at cell ' + cellNumber.textContent);
+        gameCell.style.backgroundColor = 'red';
       } else {
         console.log('You cleared cell ' + cellNumber.textContent);
+        gameCell.style.backgroundColor = 'green';
       }
-      
     });
 
     gameCell.appendChild(cellNumber); // Append the number element to the cell
