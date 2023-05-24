@@ -20,6 +20,9 @@ const gameGridContainer = document.getElementById('grid-game-container');
 
 startActualGameBtn.addEventListener ('click',
     function () {
+       // Clear the console
+      console.clear();
+
       // To clear Grid with .innerHTML
       gameGridContainer.innerHTML = "";
 
