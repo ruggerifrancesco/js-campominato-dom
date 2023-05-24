@@ -106,13 +106,6 @@
     .bomb-cell:nth-child(100) {
       border-bottom-right-radius: 1rem;
     }
-
-    .cell-with-bomb {
-      background-color: red;
-    }
-    .cell-cleared {
-      background-color: greenyellow;
-    }
   
   footer {
     display: flex;
