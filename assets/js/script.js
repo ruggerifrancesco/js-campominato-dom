@@ -21,19 +21,20 @@ const gameGridContainer = document.getElementById('grid-game-container');
 startActualGameBtn.addEventListener ('click',
     function () {
       // To clear Grid with .innerHTML
-        // gameGridContainer.innerHTML = "";
-      resetGrid(gameGridContainer);
-      generateGrid();
+      gameGridContainer.innerHTML = "";
+
+      const bombCount = 16;
+      const minRandom = 1;
+      const maxRandom = 16;
+      const bombNumbers = randomNumbersNotEqual(bombCount, minRandom, maxRandom); // Generate random bomb cell numbers
+      console.log(randomNumbersNotEqual(16, 1, 16));
+      // Test Prin 10 times array
+      // for (let i = 0; i < 10; i++) {
+        // console.log(randomNumbersNotEqual(16, 1, 16));
+      // }
+      generateGrid(bombNumbers);
     }
 )
-
-// Function to reset the grid
-function resetGrid(constName) {
-  // Remove all child elements (grid cells) from the grid container
-  while (constName.firstChild) {
-    constName.removeChild(constName.firstChild);
-  }
-}
 
 // Function to generate the grid
 function generateGrid() {
@@ -69,14 +70,14 @@ function createElement (tagName, className) {
 
 
 // Function to create random numbers with no equals
-function randomArray (count, max, min) {
-  const array = [];
-  while (array.length < count) {
+function randomNumbersNotEqual (count, min, max) {
+  const numbersNotEqual = [];
+  while (numbersNotEqual.length < count) {
     const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
-    if (array.indexOf(randomNumber) == -1) {
-      array.push(randomNumber);
+    if (numbersNotEqual.indexOf(randomNumber) == -1) {
+      numbersNotEqual.push(randomNumber);
     }
   }
-  return array;
+  return numbersNotEqual;
 }
 
