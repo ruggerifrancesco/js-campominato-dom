@@ -23,21 +23,19 @@ startActualGameBtn.addEventListener ('click',
       // To clear Grid with .innerHTML
       gameGridContainer.innerHTML = "";
 
+      // Inizialize Game
       const bombCount = 16;
       const minRandom = 1;
       const maxRandom = 16;
       const bombNumbers = randomNumbersNotEqual(bombCount, minRandom, maxRandom); // Generate random bomb cell numbers
-      console.log(randomNumbersNotEqual(16, 1, 16));
-      // Test Prin 10 times array
-      // for (let i = 0; i < 10; i++) {
-        // console.log(randomNumbersNotEqual(16, 1, 16));
-      // }
+      console.log(randomNumbersNotEqual(bombCount, minRandom, maxRandom)); // Print arrayRandomNumbers in console
+
       generateGrid(bombNumbers);
     }
 )
 
 // Function to generate the grid
-function generateGrid() {
+function generateGrid(bombCell) {
 
   for (let i = 1; i <= 100; i++) {
     const gameCell = createElement('div', 'bomb-cell');
@@ -46,12 +44,10 @@ function generateGrid() {
 
     gameCell.addEventListener('click', function () {
 
-      if (gameCell.classList.contains('cell-selected')) {
-        gameCell.classList.remove('cell-selected');
-        console.log('You unselected cell ' + cellNumber.textContent);
+      if (gameCell.classList.contains('cell-with-bomb')) {
+        console.log('You hit a bomb at cell ' + cellNumber.textContent);
       } else {
-        gameCell.classList.add('cell-selected');
-        console.log('You selected cell ' + cellNumber.textContent);
+        console.log('You cleared cell ' + cellNumber.textContent);
       }
       
     });
