@@ -65,11 +65,12 @@ function generateGrid(bombCell, elementHits, gameEnd) {
         console.log('You hit a bomb at cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'red';
 
-         // Check if the player hit only one bomb
+         // Instructions after the player takes a bomb
          if (elementHits === 1) {
           console.log('Game over! You hit a bomb. You lost!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
           gameGridContainer.classList.add('hidden');
+          startActualGameBtn.innerHTML = 'Play New Game';
         }
 
       } else {
