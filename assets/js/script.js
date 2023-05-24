@@ -31,6 +31,7 @@ startActualGameBtn.addEventListener ('click',
       const minRandom = 1;
       const maxRandom = 100;
       const bombNumbers = randomNumbersNotEqual(bombCount, minRandom, maxRandom); // Generate random bomb cell numbers
+      console.log(bombNumbers);
 
       generateGrid(bombNumbers);
     }
