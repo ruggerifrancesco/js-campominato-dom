@@ -106,6 +106,10 @@
     .bomb-cell:nth-child(100) {
       border-bottom-right-radius: 1rem;
     }
+
+    .clicked {
+      cursor: default;
+    }
   
   footer {
     display: flex;
