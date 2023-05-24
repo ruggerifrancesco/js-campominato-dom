@@ -18,13 +18,16 @@ window.addEventListener('load', () => {
 const startActualGameBtn = document.getElementById('play-btn');
 const gameGridContainer = document.getElementById('grid-game-container');
 
+let clearedCellsCount = 0; // Variable to track the number of cleared cells
+let bombsHitCount = 0; // Variable to track the number of bombs hit
+
 startActualGameBtn.addEventListener ('click',
     function () {
        // Clear the console
       console.clear();
 
-      let clearedCellsCount = 0; // Variable to track the number of cleared cells
-      let bombsHitCount = 0; // Variable to track the number of bombs hit
+      clearedCellsCount = 0; 
+      bombsHitCount = 0; 
       let gameEnded = false; // Variable to track if the game has ended
 
       // To clear Grid with .innerHTML
@@ -47,6 +50,7 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
   for (let i = 1; i <= 100; i++) {
     const gameCell = createElement('div', 'bomb-cell');
     const cellNumber = createElement('span', 'cell-number');
+
     cellNumber.textContent = i; // Set the cell number
 
     // Solution to clicked function by stack overflow
@@ -58,18 +62,17 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
     gameCell.classList.add('clicked'); // Mark the cell as clicked
 
       if (bombCell.includes(i)) {
-        // Increase Counter
-        elementHits++;
-        clearElements++;
 
         console.log('You hit a bomb at cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'red';
 
+        elementHits++; // Increment the bombs hit count
+
         // Instructions after the player takes a bomb
         if (elementHits === 16) {
+
           console.log('Game over! You hit a bomb. You lost!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
-          gameGridContainer.classList.add('hidden');
           startActualGameBtn.innerHTML = 'Play New Game';
         } 
 
@@ -77,13 +80,20 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
         console.log('You cleared cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'green';
 
-        if (clearElements === 100 && elementHits === 0) {
-          console.log('Game over! You cleared all the grid. Congratulation!');
+        clearElements++; // Increment the cleared cells count
+
+        // Instructions after the player clear all cells
+        if (clearElements === 83 && elementHits === 0) {
+
+          console.log('You cleared all the grid. Congratulation!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
-          gameGridContainer.classList.add('hidden');
           startActualGameBtn.innerHTML = 'Play New Game';
         }
       }
+
+      // Update the values of clearedCellsCount and bombsHitCount
+      clearedCellsCount = clearElements;
+      bombsHitCount = elementHits;
       
     });
 
