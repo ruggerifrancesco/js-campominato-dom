@@ -5,12 +5,14 @@ window.addEventListener('load', () => {
     const header = document.getElementById('header');
     const gameContainer = document.getElementById('game-container');
     const footer = document.querySelector('footer');
+    const h4Element = document.querySelector('#grid-game-container h4');
   
     startButton.addEventListener('click', () => {
       container.style.display = 'none';
       header.style.display = 'flex';
       gameContainer.classList.remove('hidden');
       footer.classList.remove('hidden');
+      h4Element.classList.add('hidden');
     });
   });
   
