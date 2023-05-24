@@ -23,6 +23,9 @@ startActualGameBtn.addEventListener ('click',
        // Clear the console
       console.clear();
 
+      let bombsHitCount = 0; // Variable to track the number of bombs hit
+      let gameEnded = false; // Variable to track if the game has ended
+
       // To clear Grid with .innerHTML
       gameGridContainer.innerHTML = "";
 
@@ -33,12 +36,12 @@ startActualGameBtn.addEventListener ('click',
       const bombNumbers = randomNumbersNotEqual(bombCount, minRandom, maxRandom); // Generate random bomb cell numbers
       console.log(bombNumbers);
 
-      generateGrid(bombNumbers);
+      generateGrid(bombNumbers, bombsHitCount, gameEnded);
     }
 )
 
 // Function to generate the grid
-function generateGrid(bombCell) {
+function generateGrid(bombCell, elementHits, gameEnd) {
 
   for (let i = 1; i <= 100; i++) {
     const gameCell = createElement('div', 'bomb-cell');
@@ -54,8 +57,18 @@ function generateGrid(bombCell) {
     gameCell.classList.add('clicked'); // Mark the cell as clicked
 
       if (bombCell.includes(i)) {
+        // Increase Counter
+        elementHits++
+
         console.log('You hit a bomb at cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'red';
+
+         // Check if the player hit only one bomb
+         if (elementHits === 1) {
+          console.log('Game over! You hit a bomb. You lost!');
+          gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
+        }
+
       } else {
         console.log('You cleared cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'green';
