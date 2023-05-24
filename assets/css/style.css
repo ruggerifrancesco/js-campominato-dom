@@ -107,8 +107,11 @@
       border-bottom-right-radius: 1rem;
     }
 
-    .cell-selected {
-      background-color: #0d77b0;
+    .cell-with-bomb {
+      background-color: red;
+    }
+    .cell-cleared {
+      background-color: greenyellow;
     }
   
   footer {
