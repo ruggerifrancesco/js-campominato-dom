@@ -83,7 +83,7 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
         clearElements++; // Increment the cleared cells count
 
         // Instructions after the player clear all cells
-        if (clearedCellsCount === 84 && elementHits === 0) {
+        if (clearElements === 84 && elementHits === 0) {
 
           console.log('You cleared all the grid. Congratulation!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
