@@ -20,6 +20,7 @@ const gameGridContainer = document.getElementById('grid-game-container');
 
 let clearedCellsCount = 0; // Variable to track the number of cleared cells
 let bombsHitCount = 0; // Variable to track the number of bombs hit
+let gameEnded = false; // Variable to track if the game has ended
 
 startActualGameBtn.addEventListener ('click',
     function () {
@@ -28,7 +29,7 @@ startActualGameBtn.addEventListener ('click',
 
       clearedCellsCount = 0; 
       bombsHitCount = 0; 
-      let gameEnded = false; // Variable to track if the game has ended
+      gameEnded = false;
 
       // To clear Grid with .innerHTML
       gameGridContainer.innerHTML = "";
@@ -61,8 +62,6 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
 
     gameCell.classList.add('clicked'); // Mark the cell as clicked
 
-    if (!gameEnd) {
-
       if (bombCell.includes(i)) {
         console.log('You hit a bomb at cell ' + cellNumber.textContent);
         gameCell.style.backgroundColor = 'red';
@@ -70,7 +69,7 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
         elementHits++; // Increment the bombs hit count
 
         // Instructions after the player takes a bomb
-        if (elementHits === 1) {
+        if (elementHits === 16) {
           console.log('Game over! You hit a bomb. You lost! High Score: ' + clearElements);
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
           startActualGameBtn.innerHTML = 'Play New Game';
@@ -83,16 +82,12 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
         clearElements++; // Increment the cleared cells count
 
         // Instructions after the player clear all cells
-        if (clearElements === 84 && elementHits === 0) {
-          console.log('You cleared all the grid. Congratulation!');
-          gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
+        if (clearElements === 100 - bombCell.length) {
+          console.log('You cleared all the cells without hitting a bomb. Congratulations!');
+          gameEnd = true;
           startActualGameBtn.innerHTML = 'Play New Game';
-        }
+        }        
       }
-
-    } else {
-
-    }
 
       // Update the values of clearedCellsCount and bombsHitCount
       clearedCellsCount = clearElements;
