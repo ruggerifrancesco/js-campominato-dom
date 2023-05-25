@@ -69,7 +69,7 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
         elementHits++; // Increment the bombs hit count
 
         // Instructions after the player takes a bomb
-        if (elementHits === 16) {
+        if (elementHits === 1) {
           console.log('Game over! You hit a bomb. You lost! High Score: ' + clearElements);
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
           startActualGameBtn.innerHTML = 'Play New Game';
