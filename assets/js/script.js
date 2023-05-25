@@ -53,7 +53,7 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
 
     cellNumber.textContent = i; // Set the cell number
 
-    // Solution to clicked function by stack overflow
+    // Solution to not let click function by stack overflow
     gameCell.addEventListener('click', function () {
       if (gameCell.classList.contains('clicked') || gameEnd) {
         return; // Exit if the cell has already been clicked
@@ -83,7 +83,7 @@ function generateGrid(bombCell, clearElements, elementHits, gameEnd) {
         clearElements++; // Increment the cleared cells count
 
         // Instructions after the player clear all cells
-        if (clearElements === 83 && elementHits === 0) {
+        if (clearedCellsCount === 84 && elementHits === 0) {
 
           console.log('You cleared all the grid. Congratulation!');
           gameEnd = true; // Set gameEnded flag to prevent further interactions with the grid
